@@ -17,7 +17,7 @@ my $dbh = DBIish.connect("Pg", :host<localhost>, :database<fimstat>, :user($conf
 
 my $req = $dbh.prepare("SELECT story from trackedstory;");
 $req.execute();
-initDBstuff("localhost");
+initDBstuff("localhost", :user($conf<database><user>), :password($conf<database><password>));
 
 my %authors;
 
