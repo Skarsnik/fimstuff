@@ -1,0 +1,37 @@
+div.banner {
+	position: relative;
+	top:0;
+	left:0;
+	right:0;
+}
+
+div.banner-center {
+	position: relative;
+    overflow: hidden;
+	bottom:0;
+    width: 524px;
+	height: 231px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.banner-center img {
+	position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 524px;
+    height: 231;
+    opacity: 0.2;
+	z-index:-1;
+}
+
+
+p.banner-title {
+	font-family:"Candara";
+	font-style: italic;
+	font-size:100px;
+	text-align:center;
+	color:#444d82;
+	z-index:2;
+	opacity:1;
+}

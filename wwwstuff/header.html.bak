@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta  content="text/html; charset=UTF-8"  http-equiv="content-type">
+    <title></title>
+  </head>
+  <body>
+    <div  class="banner"> <img  style="width: 229px; height: 259px; float:left;"
+
+         alt="Royal Guard Blueblood"  src="guardblueblood.png">
+         <div class="banner-center">
+           <p class="banner-title">Stats Thingy</p>
+         </div>
+         <img  style="width: 524px; height: 231px; margin-left:auto; margin-right:auto; opacity:0.5;"
+
+         alt="graph "  src="graph.png">
+           
+         <img  style="width: 219px; height: 214px; float:right"
+
+         alt="Blueblood grey"  src="nice_blueblood.png"> </div>
+    
+  </body>
+</html>
