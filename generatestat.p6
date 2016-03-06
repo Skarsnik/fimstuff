@@ -31,8 +31,7 @@ while (my @row = $req.fetchrow_array) {
 #say %authors.perl;
 
 my $liststorytt = Template::Mojo.from-file("{$basedir}/wwwtemplates/liststory.tm");
-say $liststorytt;
-my $flist = open "{$wwwdir}/liststory.html", :w;
+my $flist = open "{$wwwdir}/liststory.html", :w or die "Can't create liststory";
 my $html_header = slurp "$basedir/wwwstuff/header.html";
 my $html_footer = '</body></html>';
 
@@ -62,6 +61,7 @@ for %authors.kv -> $key, $value {
      my $id = $s.id;
      $req = $dbh.prepare("SELECT DISTINCT dateu from tracked_story_$id ORDER by dateu;");
      $req.execute();
+     next if $req.rows eq "0E0";
      my @dates = $req.fetchall_arrayref;
      say "Last update is {@dates.tail(1)[0]}";
      $req = $dbh.prepare("SELECT numchapter, chapterid from tracked_story_$id WHERE dateu=?;");

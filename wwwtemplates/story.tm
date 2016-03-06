@@ -6,12 +6,14 @@
 <h1><%= $story.title %></h1>
 <table>
 <tr>
+<th></th>
 % for @dates -> $date {
   <th><%= $date %></th>
 % }
 </tr>
-% for @data -> @sdata {
+% for @data.kv -> $i, @sdata {
   <tr>
+  <td class="chapter-title"><%= $story.chapters[$i].title if $story.chapters[$i].defined %></td>
   % my $pos = 0;
   % for @sdata -> $pdata {
   <td>
@@ -24,6 +26,7 @@
   </td>
   % $pos++;
   % }
+  <td class="chapter-title"><%= $story.chapters[$i].title if $story.chapters[$i].defined %></td>
   </tr>
 % }
 </table>

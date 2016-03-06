@@ -72,11 +72,10 @@ my $selectauthor_req;
   
   sub fromDB(Int $id) returns Story is export {
      $selectstory_req.execute($id);
-     #say $selectstory_req.can('column_names');
-     my %hash = $selectstory_req.row(:hash);
+     my Any %hash = $selectstory_req.row(:hash);
      return Any if !%hash.defined;
-     #say %hash.perl;
-     
+     %hash<tags> = %hash<tags>[0];
+     %hash<character_tags> = %hash<character_tags>[0];
      $selectauthor_req.execute(%hash<author_id>);
      my $hashref = $selectauthor_req.fetchrow_hashref;
      my $p = $hashref<name>;
