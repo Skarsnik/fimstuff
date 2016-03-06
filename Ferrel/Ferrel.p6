@@ -38,13 +38,18 @@ react {
   whenever Supply.interval(2) {
     #We only want new message
     my @msg = $disc.get-messages($qnb-channel, :after($last-msg-id));
-    say @msg;
     for @msg -> $msg {
       if $msg.content ~~ /^"!last"$/ {
         my %chapter = $fim.chapter-history.tail(1)[0];
-        my $time = strftime "%A, %B %d at %H:%M", DateTime(%chapter<time>);
+        my $time = strftime "%A, %B %d at %H:%M", DateTime.new(%chapter<time>.Int);
         my $smsg = "The lastest update ($time) is : %chapter<title> (%chapter<wordcount> words) of %chapter<story> by %chapter<author> -  http://www.fimfiction.net%chapter<link>";
-        $disc.send-message($qnb-channel, )
+        $disc.send-message($qnb-channel, $smsg);
+      }
+      if $msg.content ~~ /^"!last-blog"$/ {
+        my %blog = $fim.blog-history.tail(1)[0];
+        my $time = strftime "%A, %B %d at %H:%M", DateTime.new(%blog<time>.Int);
+        my $smsg = "The last blog post ($time) is : %blog<title> by %blog<author> -  http://www.fimfiction.net%blog<link>";
+        $disc.send-message($qnb-channel, $smsg);
       }
       #if $msg.content ~~ /^"!last"\s+()/ {
       #  my $smsg = "The lastest update for %chapter<story> ($time) is : %chapter<title> (%chapter<wordcount> words) -  http://www.fimfiction.net%chapter<link>";
@@ -63,13 +68,13 @@ react {
          my %chapter = $fim.chapter-history.tail(1)[0];
          my $message = "%chapter<author> posted a new chapter of %chapter<story> : %chapter<title> (%chapter<wordcount> words) - https://www.fimfiction.net%chapter<link>";
          say $message;
-         #$disc.send-message($qnb-channel, $message);
+         $disc.send-message($qnb-channel, $message);
       }
       if $fim.look-for-new-blogs {
          my %blog = $fim.blog-history.tail(1)[0];
          my $message = "%blog<author> posted a new blog %blog<title> - https://www.fimfiction.net%blog<link>";
          say $message;
-         #$disc.send-message($qnb-channel, $message);
+         $disc.send-message($qnb-channel, $message);
       }
       }
       CATCH {
